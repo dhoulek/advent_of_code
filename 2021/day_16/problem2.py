@@ -42,19 +42,44 @@ def parse_op(input):
 def parse_code(input):
     # print(input)
     version = int(input[:3], 2)
-    versions.append(version)
     type = int(input[3:6], 2)
     # print(version, type)
     if type == 4:
         result, rest = parse_number(input[6:])
-    elif type != 4:
+    elif type == 0:
         result, rest = parse_op(input[6:])
-        result
+        print('+:', result)
+        result = sum(result)
+    elif type == 1:
+        result, rest = parse_op(input[6:])
+        print('*:', result)
+        prod = 1
+        for e in result:
+            prod *= e
+        result = prod
+    elif type == 2:
+        result, rest = parse_op(input[6:])
+        print('min:', result)
+        result = min(result)
+    elif type == 3:
+        result, rest = parse_op(input[6:])
+        print('max:', result)
+        result = max(result)
+    elif type == 5:
+        result, rest = parse_op(input[6:])
+        print('>:', result)
+        result = int(result[0]>result[1])
+    elif type == 6:
+        result, rest = parse_op(input[6:])
+        print('<:', result)
+        result = int(result[0]<result[1])
+    elif type == 7:
+        result, rest = parse_op(input[6:])
+        print('=:', result)
+        result = int(result[0]==result[1])
     return result, rest
 
-versions = []
+# versions = []
 decoded, rest = parse_code(input)
+print('rest of the code:', rest)
 print(decoded)
-print(rest)
-print(f'list of versions: {versions}')
-print(f'sum of versions: {sum(versions)}')
