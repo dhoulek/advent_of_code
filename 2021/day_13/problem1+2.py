@@ -27,7 +27,7 @@ def print_data(data):
         line = ''
         for x in range(data.shape[1]):
             if data[y, x] == 0:
-                line += '.'
+                line += ' '
             else:
                 line += '#'                
         print(line)
