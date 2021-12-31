@@ -1,0 +1,16 @@
+test case:
+#############
+#...........#
+###B#C#B#D###
+  #A#D#C#A#  
+  #########  
+minimum energy is: 12521
+
+puzzle input:
+#############
+#...........#
+###A#D#C#A###
+  #C#D#B#B#  
+  #########  
+minimum energy is: 15365
+
