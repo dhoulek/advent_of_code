@@ -69,21 +69,21 @@ mod		x	26		[15-23]=c+14
 div		z	26                      B
 add		x	-13		[2-10]=c+1
 eql		x	w		? c+1 == d ?
-eql		x	0		[0-1]
+eql		x	0		0 | 1
 mul		y	0               0
 add		y	25		        25
-mul		y	x		        [25-26]
-add		y	1		        [26-27]
-mul		z	y		                [26-27]*B
+mul		y	x		        25 | 26
+add		y	1		        26 | 27
+mul		z	y		                26B | 27B
 mul		y	0		        0
 add		y	w               d
 add		y	3		        d+3
-mul		y	x               [0-1]*(d+3)
+mul		y	x               0 | d+3
 add		z	y                       26B | 27B+d+3 = D
 
 inp		w		                           e
 mul		x	0		
-add		x	z	    26B | 	
+add		x	z	    26B | 27B+d+3	
 mod		x	26      0 |	b+d+19
 div		z	1		                D
 add		x	14		14 | b+d+35
@@ -98,13 +98,13 @@ mul		y	0               0
 add		y	w               e		
 add		y	11              e+11
 mul		y	x               e+11
-add		z	y                       26D+e+11 = F	
+add		z	y                       26D+e+11 = E	
 
 inp		w                                   f		
 mul		x	0       0		
-add		x	z       F		
+add		x	z       E		
 mod		x	26      e+11
-div		z	1                       F
+div		z	1                       E
 add		x	15      e+26		
 eql		x	w       0		
 eql		x	0       1		
@@ -112,37 +112,37 @@ mul		y	0               0
 add		y	25              25		
 mul		y	x               25		
 add		y	1               26		
-mul		z	y                       26F            		
+mul		z	y                       26E            		
 mul		y	0               0		
 add		y	w               f		
 add		y	13              f+13		
 mul		y	x               f+13		
-add		z	y                       26F+f+13 = G
+add		z	y                       26E+f+13 = F
 
 inp		w                                   g
 mul		x	0       0		
-add		x	z       G		
+add		x	z       F
 mod		x	26      f+13		
-div		z	26                      F		
+div		z	26                      E
 add		x	-7		f+6
-eql		x	w       ? f+6 == g ?		
-eql		x	0       0 | 1		
-mul		y	0               0		
-add		y	25              25		
-mul		y	x               0 | 25		
-add		y	1               1 | 26		
-mul		z	y                       F | 26F		
-mul		y	0               0		
-add		y	w               g		
-add		y	11              g+11		
-mul		y	x               0 | g+11		
-add		z	y                       F | 26F+g+11 = H	
+eql		x	w       ? f+6 == g ?
+eql		x	0       0 | 1
+mul		y	0               0
+add		y	25              25
+mul		y	x               0 | 25
+add		y	1               1 | 26
+mul		z	y                       E | 26E
+mul		y	0               0
+add		y	w               g
+add		y	11              g+11
+mul		y	x               0 | g+11
+add		z	y                       E | 26E+g+11 = G
 
 inp		w                                   h
 mul		x	0       0
 add		x	z       h		
 mod		x	26      h		
-div		z	1                       H
+div		z	1                       G
 add		x	10      h+10
 eql		x	w       0
 eql		x	0       1
@@ -150,118 +150,123 @@ mul		y	0               0
 add		y	25              25
 mul		y	x               25
 add		y	1               26
-mul		z	y                       26H
+mul		z	y                       26G
 mul		y	0               0
 add		y	w               h		
 add		y	7               h+7
 mul		y	x               h+7
-add		z	y                       26H+h+7
+add		z	y                       26G+h+7 = H
 
-inp		w		
-mul		x		0		
-add		x		z		
-mod		x		26		
-div		z		26		
-add		x		-12		
-eql		x		w		
-eql		x		0		
-mul		y		0		
-add		y		25		
-mul		y		x		
-add		y		1		
-mul		z		y		
-mul		y		0		
-add		y		w		
-add		y		12		
-mul		y		x		
-add		z		y		
-inp		w		
-mul		x		0		
-add		x		z		
-mod		x		26		
-div		z		1		
-add		x		15		
-eql		x		w		
-eql		x		0		
-mul		y		0		
-add		y		25		
-mul		y		x		
-add		y		1		
-mul		z		y		
-mul		y		0		
-add		y		w		
-add		y		15		
-mul		y		x		
-add		z		y		
-inp		w		
-mul		x		0		
-add		x		z		
-mod		x		26		
-div		z		26		
-add		x		-16		
-eql		x		w		
-eql		x		0		
-mul		y		0		
-add		y		25		
-mul		y		x		
-add		y		1		
-mul		z		y		
-mul		y		0		
-add		y		w		
-add		y		13		
-mul		y		x		
-add		z		y		
-inp		w		
-mul		x		0		
-add		x		z		
-mod		x		26		
-div		z		26		
-add		x		-9		
-eql		x		w		
-eql		x		0		
-mul		y		0		
-add		y		25		
-mul		y		x		
-add		y		1		
-mul		z		y		
-mul		y		0		
-add		y		w		
-add		y		1		
-mul		y		x		
-add		z		y		
-inp		w		
-mul		x		0		
-add		x		z		
-mod		x		26		
-div		z		26		
-add		x		-8		
-eql		x		w		
-eql		x		0		
-mul		y		0		
-add		y		25		
-mul		y		x		
-add		y		1		
-mul		z		y		
-mul		y		0		
-add		y		w		
-add		y		15		
-mul		y		x		
-add		z		y		
-inp		w		
-mul		x		0		
-add		x		z		
-mod		x		26		
-div		z		26		
-add		x		-8		
-eql		x		w		
-eql		x		0		
-mul		y		0		
-add		y		25		
-mul		y		x		
-add		y		1		
-mul		z		y		
-mul		y		0		
-add		y		w		
-add		y		4		
-mul		y		x		
-add		z		y
+inp		w                                   i
+mul		x	0       0
+add		x	z       H
+mod		x   26      h+7
+div		z	26                      G
+add		x	-12     h-5		
+eql		x	w       ? h-5 == i ?
+eql		x	0       0 | 1
+mul		y	0               0
+add		y	25              25
+mul		y   x               0 | 25
+add		y	1               1 | 26
+mul		z	y                       G | 26G
+mul		y   0               0
+add		y	w               i		
+add		y   12              i+12
+mul		y	x               0 | i+12		
+add		z   y                       G | 26G+i+12 = I
+
+inp		w                                   j
+mul		x	0       0
+add		x	z       I
+mod		x	26      e+11 | g+11 | i+12		
+div		z	1                       I
+add		x	15      e+26 | g+26 | i+27		
+eql		x	w       0
+eql		x	0       1		
+mul		y	0               0		
+add		y	25              25		
+mul		y	x               25		
+add		y	1               26		
+mul		z	y                       26I		
+mul		y	0               0		
+add		y	w               j		
+add		y	15              j+15		
+mul		y	x               j+15		
+add		z	y                       26I+j+15 = J
+
+inp		w                                   k
+mul		x	0       0
+add		x	z       J
+mod		x	26      j+15		
+div		z	26                      I		
+add		x	-16     j-1
+eql		x   w       ? j-1 == k ?		
+eql		x	0       0 | 1		
+mul		y	0               0
+add		y   25		        25
+mul		y	x               0 | 25
+add		y	1               1 | 26		
+mul		z	y                       I | 26I		
+mul		y	0               0		
+add		y	w               k		
+add		y	13              k+13		
+mul		y	x               0 | k+13		
+add		z	y                       I | 26I+k+13 = K		
+
+inp		w                                   l
+mul		x   0       0		
+add		x   z       K		
+mod		x   26      e+11 | g+11 | i+12 | k+13		
+div		z	26                      D | E | G | I		
+add		x	-9      e+2 | g+2 | i+3 | k+4
+eql		x	w       ?? l == e+2 | g+2 | i+3 | k+4 ??
+eql		x	0       0 | 1		
+mul		y	0               0		
+add		y	25              25
+mul		y	x               0 | 25
+add		y	1               1 | 26
+mul		z	y                       K | 26K		
+mul		y	0               0
+add		y	w               l
+add		y	1               l+1
+mul		y	x               0 | l+1
+add		z   y                       K | 26K+l+1 = L
+
+inp		w                                   m
+mul		x	0       0
+add		x	z       L
+mod		x	26      e+11 | g+11 | i+12 | k+13 | l+1
+div		z	26                      D | E | G | I | K
+add		x	-8      e+3 | g+3 | i+4 | k+5 | l-7
+eql		x   w       ?? m == e+3 | g+3 | i+4 | k+5 | l-7 ??
+eql		x	0       0 | 1
+mul		y	0               0
+add		y	25              25
+mul		y	x               0 | 25
+add		y	1               1 | 26
+mul		z	y                       L | 26L		
+mul		y	0               0
+add		y	w               m
+add		y	15              m+15
+mul		y	x               0 | m+15
+add		z	y                       L | 26L+m+15 = M
+
+inp		w                                   n
+mul		x	0       0
+add		x	z       M
+mod		x	26      e+11 | g+11 | i+12 | k+13 | l+1 | m+15
+div		z	26      D | E | G | I | K | L
+add		x	-8      e+3 | g+3 | i+4 | k+5 | l-7 | m+10
+eql		x	w       ?? n ==  e+3 | g+3 | i+4 | k+5 | l-7 | m+10 ??
+eql		x	0       0 | 1
+mul		y	0               0
+add		y	25              25
+mul		y	x               0 | 25		
+add		y	1               1 | 26
+mul		z	y                       M | 26M		
+mul		y	0               0
+add		y	w               n
+add		y	4               n+4
+mul		y	x               0 | n+4
+add		z	y                       M | 26M+n+4
