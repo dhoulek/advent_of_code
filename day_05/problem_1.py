@@ -1,4 +1,5 @@
 from tqdm import tqdm
+from multiprocessing import Pool
 mappings = []
 max_affected = 0
 
@@ -58,21 +59,25 @@ print(f'The lowest location number is {min(final_locations)}\n')
     
 # print(all_seeds)
 
+def propagate(seed):
+    for mapping in mappings:
+        for m in mapping:
+            if m['src_first'] <= seed <= m['src_last']:
+                # found applicable map
+                seed += m['dest_first'] - m['src_first']
+                break
+    return seed
+
 lowest_location = int(1e10)
+i = 0
 for ini, length in zip(seeds[::2], seeds[1::2]):
-    for seed in tqdm(list(range(ini, ini+length))):
-        # recipe = [seed]
-        for mapping in mappings:
-            for m in mapping:
-                if m['src_first'] <= seed <= m['src_last']:
-                    # found applicable map
-                    seed += m['dest_first'] - m['src_first']
-                    break
-            # recipe.append(seed)
-        # print(' -> '.join([str(s) for s in recipe]))
-        lowest_location = min(lowest_location, seed)
-        if lowest_location == 0:
-            break
+    i += 1
+    print(f'Processing range {i}/{len(seeds)//2}, of length {length}')
+    with Pool() as pool:
+      mapped_range = pool.map(propagate, range(ini, ini+length))
+    lowest_location = min(lowest_location, min(mapped_range))
+    if lowest_location == 0:
+        break
     
 print('Part 2:')
 print(f'The lowest location number is {lowest_location}')
