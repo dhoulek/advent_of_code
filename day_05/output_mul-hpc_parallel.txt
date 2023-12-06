@@ -1,0 +1,15 @@
+Part 1:
+The lowest location number is 177942185
+
+Part 2:
+ Processing range 1/10, of length 6916147
+ Processing range 2/10, of length 146720986
+ Processing range 3/10, of length 244427042
+ Processing range 4/10, of length 382175449
+ Processing range 5/10, of length 2036236
+ Processing range 6/10, of length 127044950
+ Processing range 7/10, of length 93904335
+ Processing range 8/10, of length 123906789
+ Processing range 9/10, of length 620379445
+ Processing range 10/10, of length 60050954
+The lowest location number is 69841803
