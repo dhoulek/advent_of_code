@@ -25,7 +25,7 @@ def process_line(pattern, groups):
     p = re.compile(pattern.replace('?', '.'))
     sep = np.array([0] + [1]*(len(groups)-1) + [0])
     options = generate_options(len(groups)+1, free_spaces)
-    print(len(options))
+    # print(len(options))
     hits = 0
     for o in options:
         o = np.array(o) + sep
@@ -38,19 +38,14 @@ def process_line(pattern, groups):
 
 
 
-with open('test.txt', 'r') as f:
-    hits = 0
-    hits5 = 0
+with open('input.txt', 'r') as f:
+    hits = []
     for l in tqdm(f.readlines()):
         pattern, groups = l.strip().split()
         pattern = pattern.replace('.', 'o')
         groups = [int(i) for i in groups.split(',')]
-        hits += process_line(pattern, groups)
-        hits5 += process_line('?'.join([pattern]*5), groups*5)
-        print(hits, hits5)
+        hits.append(process_line(pattern, groups))
+print(hits)
         
 print('Part 1:')
-print(f'Sum of possible arrangements: {hits}\n')
-
-# print(re.findall('...o###', '#o#o###'))
-# print(re.findall('.h', 'ahojojoh'))
+print(f'Sum of possible arrangements: {sum(hits)}\n')
