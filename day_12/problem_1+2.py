@@ -1,3 +1,6 @@
+# Algorithm inspired frrom
+# https://github.com/maneatingape/advent-of-code-rust/blob/main/src/year2023/day12.rs
+
 # Import necessary libraries
 import numpy as np
 from tqdm import tqdm
