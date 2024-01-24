@@ -1,4 +1,5 @@
 from tqdm import tqdm
+import copy
 
 with open('test.txt', 'r') as f:
     input = f.readlines()
@@ -53,44 +54,51 @@ def count_workflow(wf, parts, used):
         acc = 1
         for m, M in parts.values():
             acc *= (M-m+1)
-        print(used)
+        # print(wf, parts)
+        # print(used, acc)
         return acc
     elif wf == 'R':
         return 0
     else:
-        used.append(wf)
-        wf = workflows[wf]
+        # print(wf, parts)
+        rules = workflows[wf]
         acc = 0
-        for r in wf[:-1]:
+        for r in rules[:-1]:
             c = r[0]
             if r[1] == '<' and parts[c][0] < r[2]:
-                a_parts = parts.copy()
-                a_parts[c][1] = min(a_parts[c][1], r[2]-1)            
-                acc += count_workflow(r[3], a_parts, used)
+                a_parts = copy.deepcopy(parts)
+                a_parts[c][1] = min(a_parts[c][1], r[2]-1)
+                # print('----', c, r[2], a_parts, parts)        
+                acc += count_workflow(r[3], a_parts, used+[wf])
                 if a_parts[c][1] == parts[c][1]:
                     # no rejected parts
+                    # print('TTrejected', c, parts, a_parts)
                     break
                 else:
                     # get limits for rejected parts and continue to the next rule
-                    parts[c][0] = parts[c][1]+1
+                    parts[c][0] = a_parts[c][1]+1
+                    # print('rejected', parts, a_parts)
             elif r[1] == '>' and parts[c][1] > r[2]:
-                a_parts = parts.copy()
+                a_parts = copy.deepcopy(parts)
                 a_parts[c][0] = max(a_parts[c][0], r[2]+1)            
-                acc += count_workflow(r[3], a_parts, used)
+                acc += count_workflow(r[3], a_parts, used+[wf])
                 if a_parts[c][0] == parts[c][0]:
                     # no rejected parts
+                    # print('TTrejected', c, parts, a_parts)
                     break
                 else:
                     # get limits for rejected parts and continue to the next rule
-                    parts[c][1] = parts[c][0]-1
+                    parts[c][1] = a_parts[c][0]-1
+                    # print('rejected', parts, a_parts)
             else:
                 # no accepted parts, continues with next rule
                 pass
         # add final condition
-        acc += count_workflow(wf[-1], parts, used)
+        acc += count_workflow(rules[-1], parts, used+[wf])
         return acc
     
-print(count_workflow('in', parts, []))
-print(4000**4)
+# print(167409079868000)
+# print(4000**4)
 # }
 print('Part 2:')
+print(count_workflow('in', parts, []))
